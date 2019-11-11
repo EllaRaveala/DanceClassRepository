@@ -36,7 +36,8 @@ public class HarjoitustyoApplication {
 			
 			Trepository.save(new Teacher("Sanni", "Laukkanen", "sanni@hotmail.com", "0446768965"));
 			Trepository.save(new Teacher("Pekka", "Pakkala", "pekka@hotmail.com", "0415836989"));
-			Trepository.save(new Teacher("Piia", "Pekkanen", "piia@hotmail.com", "0446768965"));
+			Teacher teacherPiia = new Teacher("Piia", "Pekkanen", "piia@hotmail.com", "0446768965");
+			Trepository.save(teacherPiia);
 			Trepository.save(new Teacher("Mari", "Tuominen", "mari@hotmail.com", "0447586944"));
 			
 			Srepository.save(new Student("Maija", "Poppanen", "maija@gmail.com"));
@@ -51,7 +52,9 @@ public class HarjoitustyoApplication {
 			DCrepository.save(new DanceClass("Salsa ladies style", 60, "single"));
 			DCrepository.save(new DanceClass("Urban kizomba", 90, "in couples"));	
 			
-			CIrepository.save(new ClassImplementation(DCrepository.findByName("Bachata").get(0), Trepository.findByFirstname("Sanni").get(0), "12.11", "18.00"));
+			//CIrepository.save(new ClassImplementation(DCrepository.findByName("Bachata").get(0), Trepository.findByFirstname("Sanni").get(0), "12.11", "18.00"));
+			ClassImplementation implementationBachata =new ClassImplementation(DCrepository.findByName("Bachata").get(0), Trepository.findByFirstname("Sanni").get(0), "12.11", "18.00");
+			CIrepository.save(implementationBachata);
 			CIrepository.save(new ClassImplementation(DCrepository.findByName("Salsa").get(0), Trepository.findByFirstname("Pekka").get(0), "12.11", "19.00"));
 			CIrepository.save(new ClassImplementation(DCrepository.findByName("Reggaeton").get(0), Trepository.findByFirstname("Sanni").get(0), "13.11", "18.00"));
 			CIrepository.save(new ClassImplementation(DCrepository.findByName("Rueda").get(0), Trepository.findByFirstname("Piia").get(0), "13.11", "20.00"));
@@ -65,7 +68,7 @@ public class HarjoitustyoApplication {
 			Urepository.save(user1);
 			Urepository.save(user2);
 			
-			//Erepository.save(new Enrollment(UListrepository.findByUsername("user").get(0), CIrepository.findByTeacher(Trepository.findByFirstname("Piia")).get(0));
+			Erepository.save(new Enrollment(UListrepository.findByUsername("user").get(0), implementationBachata));
 			
 			log.info("fetch all classes");
 			for (DanceClass DanceClass : DCrepository.findAll()) {

@@ -150,7 +150,7 @@ public class DanceClassController {
 	public String enroll(/*@PathVariable("id") Long implementationId,*/ Model model){
 	//model.addAttribute("implementation", CIrepository.findById(implementationId));
 	model.addAttribute("implementations", CIrepository.findAll());
-	model.addAttribute("students", Srepository.findAll());
+	//model.addAttribute("users", Urepository.findAll());
 	model.addAttribute("enrollments", Erepository.findAll());
 	model.addAttribute("enrollment", new Enrollment());
 	return "EnrollForm";
