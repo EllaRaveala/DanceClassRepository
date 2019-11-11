@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Enroll</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+ 	<h1>Enroll</h1>
+ 	
+	<div>
+		<form th:object="${enrollment}"	th:action="@{/submit}" action="#" method="post">
+			<input type="hidden" th:field="*{id}" class="form-control"/>
+			
+			<!-- <select id="studentlist" th:field="*{student}" class="form-control">
+       			<option th:each="student: ${students}" th:value="${student.id}" th:text="${student.firstname}"></option>
+    		</select>-->
+    		
+			<select id="implist" th:field="*{implementation}" class="form-control">
+       			<option th:each="implementation: ${implementations}" th:value="${implementation.id}" th:text="${implementation.date + implementation.danceClass.name + implementation.time}"></option>
+    		</select>
+    		
+    		<!-- <label for="implementation">Implementation</label>
+    		<input type="text" th:field="*{implementation.danceClass.name}"/>
+    	
+    		<input type="text" th:field="*{date}"/>
+    		<input type="text" th:field="*{time}"/>
+			<!-- -label for="status">Status (enroll/cancel)</label>
+			<input type="text" id="status" th:field="*{status}" />-->
+			<input type="submit" value="Enroll"></input>
+		</form>
+	</div>
+	
+	<h2>My Enrollments</h2>
+     
+     <table class="table table-striped">
+		<tr>
+		  
+		    <th>Date</th>
+		    <th>Time</th>
+		</tr>  
+    	<tr th:each = "enrollment : ${enrollments}">
+    		<!-- <td th:text="${enrollment.implementation.danceClass.name}"></td> 	-->
+    		<td th:text="${enrollment.implementation.date}"></td>
+    		<td th:text="${enrollment.implementation.time}"></td>
+    		<td><a th:href="@{/cancel/enrollment/{id}(id=${enrollment.id})}" class="btn btn-danger">Cancel</a></td>
+    	</tr>
+     </table> 
+</body>
+</html>

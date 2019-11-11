@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <title>Dance classes/title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="CSS/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+
+<body>
+	<div class="col-md-4">
+		<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]!</h3>
+		
+		<!-- LOGOUT BUTTON -->
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-danger"/>
+		</form>
+	</div>
+	
+	<h1>Dance classes</h1>
+	
+    <table class="table table-striped">
+		<tr>
+		    <th>Name</th>
+		    <th>Duration (min)</th>
+		    <th>Description</th>
+		    <th sec:authorize="hasAuthority('ADMIN')"> </th>
+		</tr>  
+    	<tr th:each = "danceClass : ${classes}">
+    		<td th:text="${danceClass.name}"></td>
+    		<td th:text="${danceClass.duration}"></td>
+    		<td th:text="${danceClass.description}"></td>
+    		
+    		<!-- DELETE BUTTON FOR ADMIN ONLY -->
+    		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/class/{id}(id=${danceClass.id})}" class="btn btn-danger">Delete</a></td>
+    	</tr>
+    </table> 
+     
+     <div>
+     	<br/>
+     	<a sec:authorize="hasAuthority('ADMIN')" href="/add/class" class="btn btn-success">Add Class</a> <br/>
+     	<a href="/implementations" class="btn btn-success">Implementations</a> 
+     </div>
+     
+</body>
+</html>

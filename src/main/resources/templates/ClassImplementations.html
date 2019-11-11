@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <title>Dance class Implementations</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="CSS/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+
+<body>
+	<h1>Dance class Implementations</h1>
+	
+	<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-danger"/>
+	</form></br>
+	
+    <table class="table table-striped">
+		<tr>
+		    <th>Class</th>
+		    <th>Teacher</th>
+		    <th>Date</th>
+		    <th>Time</th>
+		    <th>Enroll</th>
+		    <th sec:authorize="hasAuthority('ADMIN')"> </th> 
+		    <th sec:authorize="hasAuthority('ADMIN')"> </th>
+		</tr>  
+    	<tr th:each = "implementation : ${implementations}">
+    		<td th:text="${implementation.danceClass.name}"></td>
+    		<td th:text="${implementation.teacher.firstname}"></td>
+    		<td placeholder="dd.mm.yyyy" type="date" th:text="${implementation.date}"></td>
+    		<td th:text="${implementation.time}"></td>
+    		<td> <a th:href="@{/enroll}">Enroll</a> </td>
+    		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/implementation/{id}(id=${implementation.id})}" class="btn btn-danger">Delete</a></td>
+    		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/implementation/{id}(id=${implementation.id})}">Edit</a> </td>  	
+    	</tr>
+     </table> 
+     
+      </br>
+     <a sec:authorize="hasAuthority('ADMIN')" href="/add/implementation" class="btn btn-success">Add Implementation</a></br>
+     <a href="/classes" class="btn btn-success">Classes</a> 
+
+</body>
+</html>

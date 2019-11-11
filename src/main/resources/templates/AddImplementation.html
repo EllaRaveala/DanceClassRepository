@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+	<title>Add Implementation</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+ 	<h1>Add Implementation</h1>
+ 	
+	<div>
+		<form th:object="${implementation}" th:action="@{/save/implementation}" action="#" method="post">
+			<label for="classlist">Class</label>
+			 	<select id="classlist" th:field="*{danceClass}" class="form-control">
+       				<option th:each="danceclass: ${danceclasses}" th:value="${danceclass.id}" th:text="${danceclass.name}"></option>
+    			</select>
+    		<label for="teacherlist">Teacher</label>
+			 	<select id="teacherlist" th:field="*{teacher}" class="form-control">
+       				<option th:each="teacher: ${teachers}" th:value="${teacher.id}" th:text="${teacher.firstname}"></option>
+    			</select>
+			<label for="date">Date</label>
+			<input type="text" id="date" th:field="*{date}" />
+			<label for="time">Time</label>
+			<input type="text" id="time" th:field="*{time}" />
+			
+			<input type="submit" value="Save"></input>
+		</form>
+	</div>
+</body>
+</html>
