@@ -1,4 +1,4 @@
-package hh.swd20.Harjoitystyo;
+
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -36,6 +36,8 @@ public class HarjoitustyoRepositoryTests {
 	@Autowired
 	private UserRepository Urepository;
 	
+	DanceClass danceClass1;
+	
 	@Test
 	public void findByNameShouldReturnDanceClass() {
 	List<DanceClass> danceClasses = DCrepository.findByName("Bachata");
@@ -45,17 +47,15 @@ public class HarjoitustyoRepositoryTests {
 	
 	@Test
 	public void createNewDanceClassShouldBeSuccesful() {
-	DanceClass danceClass1 = new DanceClass("Kizomba ladies style", 60, "single");
-	DCrepository.save(danceClass1);
-	assertThat(danceClass1.getId()).isNotNull();
+	DanceClass danceClass = new DanceClass("Kizomba ladies style", 60, "single");
+	DCrepository.save(danceClass);
+	assertThat(danceClass.getId()).isNotNull();
 	}
 	
 	@Test
     public void deleteDanceClassByIdFromRepositoryShouldBeSuccessful() {
-	DanceClass danceClass2 = new DanceClass("Zumba", 60, "single");
-	DCrepository.save(danceClass2);
-    DCrepository.deleteById(danceClass2.getId());
-    assertThat(danceClass2.getId()).isNull();
+        DCrepository.deleteById(danceClass1.getId());
+        assertThat(danceClass1.getId()).isNull();
     }
 	
 	@Test

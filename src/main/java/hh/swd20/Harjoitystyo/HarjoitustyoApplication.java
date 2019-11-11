@@ -13,8 +13,6 @@ import hh.swd20.Harjoitystyo.domain.DanceClass;
 import hh.swd20.Harjoitystyo.domain.DanceClassRepository;
 import hh.swd20.Harjoitystyo.domain.Enrollment;
 import hh.swd20.Harjoitystyo.domain.EnrollmentRepository;
-import hh.swd20.Harjoitystyo.domain.Student;
-import hh.swd20.Harjoitystyo.domain.StudentRepository;
 import hh.swd20.Harjoitystyo.domain.Teacher;
 import hh.swd20.Harjoitystyo.domain.TeacherRepository;
 import hh.swd20.Harjoitystyo.domain.User;
@@ -30,18 +28,14 @@ public class HarjoitustyoApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner danceClassDemo(DanceClassRepository DCrepository, ClassImplementationRepository CIrepository, StudentRepository Srepository, TeacherRepository Trepository, UserRepository Urepository, EnrollmentRepository Erepository, UserRepositoryList UListrepository) {
+	public CommandLineRunner danceClassDemo(DanceClassRepository DCrepository, ClassImplementationRepository CIrepository, TeacherRepository Trepository, UserRepository Urepository, EnrollmentRepository Erepository, UserRepositoryList UListrepository) {
 		return (args) -> {
 			log.info("save a few classes");
 			
 			Trepository.save(new Teacher("Sanni", "Laukkanen", "sanni@hotmail.com", "0446768965"));
 			Trepository.save(new Teacher("Pekka", "Pakkala", "pekka@hotmail.com", "0415836989"));
-			Teacher teacherPiia = new Teacher("Piia", "Pekkanen", "piia@hotmail.com", "0446768965");
-			Trepository.save(teacherPiia);
+			Trepository.save(new Teacher("Piia", "Pekkanen", "piia@hotmail.com", "0446768965"));
 			Trepository.save(new Teacher("Mari", "Tuominen", "mari@hotmail.com", "0447586944"));
-			
-			Srepository.save(new Student("Maija", "Poppanen", "maija@gmail.com"));
-			Srepository.save(new Student("Mikko", "Mikkonen", "mikko@gmail.com"));
 			
 			DCrepository.save(new DanceClass("Bachata", 60, "in couples"));
 			DCrepository.save(new DanceClass("Salsa", 60, "in couples"));	
@@ -52,7 +46,6 @@ public class HarjoitustyoApplication {
 			DCrepository.save(new DanceClass("Salsa ladies style", 60, "single"));
 			DCrepository.save(new DanceClass("Urban kizomba", 90, "in couples"));	
 			
-			//CIrepository.save(new ClassImplementation(DCrepository.findByName("Bachata").get(0), Trepository.findByFirstname("Sanni").get(0), "12.11", "18.00"));
 			ClassImplementation implementationBachata =new ClassImplementation(DCrepository.findByName("Bachata").get(0), Trepository.findByFirstname("Sanni").get(0), "12.11", "18.00");
 			CIrepository.save(implementationBachata);
 			CIrepository.save(new ClassImplementation(DCrepository.findByName("Salsa").get(0), Trepository.findByFirstname("Pekka").get(0), "12.11", "19.00"));

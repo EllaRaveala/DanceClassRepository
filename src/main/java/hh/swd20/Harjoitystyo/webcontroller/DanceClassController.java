@@ -18,7 +18,6 @@ import hh.swd20.Harjoitystyo.domain.DanceClass;
 import hh.swd20.Harjoitystyo.domain.DanceClassRepository;
 import hh.swd20.Harjoitystyo.domain.Enrollment;
 import hh.swd20.Harjoitystyo.domain.EnrollmentRepository;
-import hh.swd20.Harjoitystyo.domain.StudentRepository;
 import hh.swd20.Harjoitystyo.domain.Teacher;
 import hh.swd20.Harjoitystyo.domain.TeacherRepository;
 
@@ -28,9 +27,6 @@ public class DanceClassController {
 	
 	@Autowired
 	private DanceClassRepository DCrepository;
-	
-	@Autowired
-	private StudentRepository Srepository;
 	
 	@Autowired
 	private TeacherRepository Trepository;
@@ -145,12 +141,20 @@ public class DanceClassController {
 	return "redirect:/implementations";
 	}
 	
-	//Enroll for implementation
-	@RequestMapping(value = "/enroll")
-	public String enroll(/*@PathVariable("id") Long implementationId,*/ Model model){
-	//model.addAttribute("implementation", CIrepository.findById(implementationId));
+	/*Enroll for implementation by id
+	@RequestMapping(value = "/enroll/{id}")
+	public String enrollByImplementationId(@PathVariable("id") Long implementationId, Model model){
+	model.addAttribute("implementation", CIrepository.findById(implementationId));
 	model.addAttribute("implementations", CIrepository.findAll());
-	//model.addAttribute("users", Urepository.findAll());
+	model.addAttribute("enrollments", Erepository.findAll());
+	model.addAttribute("enrollment", new Enrollment());
+	return "EnrollForm";
+	}*/
+	
+	//Enroll for implementation choosing from a dropdown list
+	@RequestMapping(value = "/enroll")
+	public String enrollDropDowm(Model model){
+	model.addAttribute("implementations", CIrepository.findAll());
 	model.addAttribute("enrollments", Erepository.findAll());
 	model.addAttribute("enrollment", new Enrollment());
 	return "EnrollForm";
@@ -160,7 +164,7 @@ public class DanceClassController {
 	@RequestMapping(value = "/submit", method = RequestMethod.POST)
 	public String saveEnrollment(Enrollment enrollment){
 	Erepository.save(enrollment);
-	return "redirect:/implementations";
+	return "redirect:/enroll";
 	}
 	
 	//Delete class by id

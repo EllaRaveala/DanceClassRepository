@@ -9,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 public class DanceClass {
 	@Id
@@ -29,6 +27,14 @@ public class DanceClass {
 		this.name = null;
 		this.duration = 0;
 		this.description= null;
+	}
+	
+	public DanceClass(String name, int duration, String description, List<ClassImplementation> implementations) {
+		super();
+		this.name = name;
+		this.duration = duration;
+		this.description = description;
+		this.implementations=implementations;
 	}
 	
 	public DanceClass(String name, int duration, String description) {
@@ -71,14 +77,13 @@ public class DanceClass {
 		this.description = description;
 	}
 	
-
-	/*public List<ClassImplementation> getImplementations() {
+	public List<ClassImplementation> getImplementations() {
 		return implementations;
 	}
 
 	public void setImplementations(List<ClassImplementation> implementations) {
 		this.implementations = implementations;
-	}*/
+	}
 
 	@Override
 	public String toString() {
